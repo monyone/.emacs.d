@@ -1,0 +1,3 @@
+[submodule "site-elisp/el-get"]
+	path = site-elisp/el-get
+	url = git://github.com/dimitri/el-get.git
