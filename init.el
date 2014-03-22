@@ -55,7 +55,7 @@
 ;-------------------------------------------
 ; el-get 用の設定
 ;-------------------------------------------
-;(add-to-list 'load-path "~/.emacs.d/site-elisp/el-get")
+(add-to-list 'load-path "~/.emacs.d/el-get-elisp/el-get")
 (setq el-get-dir "~/.emacs.d/el-get-elisp")
 
 (unless (require 'el-get nil 'noerror)
