@@ -1,6 +1,14 @@
+;-------------------------------------------
+; 保存に関する設定
+;-------------------------------------------
+
 ;;; バックアップファイルはウザい!!!
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+
+;-------------------------------------------
+; エディタの表示に関する設定
+;-------------------------------------------
 
 ;;; 現在行を目立たせる
 (global-hl-line-mode)
@@ -20,7 +28,9 @@
 (iswitchb-mode t)
 ;(iswitchb-default-keybindings)
 
-
+;-------------------------------------------
+; 標準のパッケージ管理に関する設定
+;-------------------------------------------
 
 ;;; emacs 24 以降なら標準でパッケージ管理できる
 (require 'package)
@@ -41,6 +51,30 @@
 (dolist (package installed_packages)
   (when (or (not (package-installed-p package)))
     (package-install package)))
+
+;-------------------------------------------
+; el-get 用の設定
+;-------------------------------------------
+;(add-to-list 'load-path "~/.emacs.d/site-elisp/el-get")
+(setq el-get-dir "~/.emacs.d/el-get-elisp")
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(require 'el-get)
+
+(el-get 'sync)
+
+;; インストしたものをsyncする
+(defvar el-get-packages
+  '()
+  "A list of package to install from el-get al alunch.")
+(el-get 'sync el-get-packages)
+
 ;;; インスコしたものに対する設定
 ;;markdown
 (require 'markdown-mode)
