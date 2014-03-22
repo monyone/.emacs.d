@@ -1,0 +1,8 @@
+;;; ignore lists
+
+;; directory
+elpa/
+auto-save-list/
+
+;; files (all)
+*.elc
