@@ -2,7 +2,13 @@
 
 ;; directory
 elpa/
+elpa/archives/
 auto-save-list/
+var/
+cache/
+eshell/
 
 ;; files (all)
 *.elc
+*.DS_Store
+tramp
