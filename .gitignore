@@ -15,6 +15,5 @@ tramp
 
 ;; el-get-option
 el-get-elisp/*
-!el-get-elisp/el-get-emacswiki-recipes/
 !el-get-elisp/el-get-user-recipes/
 !.gitkeep
