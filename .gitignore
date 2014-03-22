@@ -3,6 +3,7 @@
 ;; directory
 elpa/
 elpa/archives/
+el-git/
 auto-save-list/
 var/
 cache/
