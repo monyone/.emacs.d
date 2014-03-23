@@ -91,6 +91,8 @@
 
 (require 'el-get)
 
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-elisp/el-git-user-recipes")
+
 (el-get 'sync)
 
 ;; インストしたものをsyncする
