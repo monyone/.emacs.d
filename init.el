@@ -60,6 +60,9 @@
   '(
     markdown-mode  ;;; markdown用
     markdown-mode+ ;;;
+
+    ;; 突然の死で強調表示
+    sudden-death
    )
   "A list of packages to install from package at launch.")
 ;; 無いものに関してはインストールするように.
@@ -98,9 +101,9 @@
 ;; インストしたものをsyncする
 (defvar el-get-packages
   '(
-    ;;括弧の強調表示
+    ;; 括弧の強調表示
     rainbow-delimiters
-    ;;helm関連
+    ;; helm関連
     helm
     helm-descbinds  ;;キーバインドをhelmで表示
    )
@@ -119,6 +122,9 @@
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode t)
 (custom-set-faces '(rainbow-delimiters-depth-1-face ((t (:foreground "#7f8c8d")))))
+
+;; sudden-death
+(require 'sudden-death)
 
 ;;helm
 (require 'helm-config)
