@@ -12,6 +12,7 @@ eshell/
 *.elc
 *.DS_Store
 tramp
+ac-comphist.dat
 
 ;; el-get-option
 el-get-elisp/*

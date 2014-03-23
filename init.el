@@ -58,12 +58,18 @@
 ;;; 標準で管理するパッケージを定義
 (defvar installed_packages
   '(
-    markdown-mode  ;;; markdown用
-    markdown-mode+ ;;;
+    ;; markdown
+    markdown-mode
+    markdown-mode+
     ;; 行番号を左に表示
     linum
     ;; 突然の死で強調表示
     sudden-death
+    ;;helm + auto-complate
+    auto-complete
+    helm
+    ac-helm
+    helm-descbinds
    )
   "A list of packages to install from package at launch.")
 ;; 無いものに関してはインストールするように.
@@ -106,9 +112,11 @@
     rainbow-delimiters
     ;; 検索
     anzu
+    ;;
+    auto-complete
     ;; helm関連
-    helm
-    helm-descbinds  ;;キーバインドをhelmで表示
+    ;;helm
+    ;;helm-descbinds  ;;キーバインドをhelmで表示
    )
   "A list of package to install from el-get al alunch.")
 (el-get 'sync el-get-packages)
@@ -141,6 +149,23 @@
   '(anzu-deactivate-region t)
   '(anzu-search-threshold 1000))
 
+;; auto-complete
+(require 'auto-complete)
+(global-auto-complete-mode t)
+(setq ac-auto-start 2)                         ; 2 文字以上で起動
+(setq ac-auto-show-menu 0.1)                   ; 0.1秒でメニュー表示
+(setq ac-use-comphist t)                       ; 補完候補をソート
+(setq ac-candidate-limit nil)                  ; 補完候補表示を無制限に
+(setq ac-use-quick-help nil)                   ; tool tip 無し
+(setq ac-use-menu-map t)                       ; キーバインド
+(define-key ac-menu-map (kbd "C-n")         'ac-next)
+(define-key ac-menu-map (kbd "C-p")         'ac-previous)
+(define-key ac-completing-map (kbd "<tab>") 'nil)
+(define-key ac-completing-map (kbd "<tab>") 'ac-complete)
+;;(define-key ac-completing-map (kbd "M-/")   'ac-stop)
+(define-key ac-completing-map (kbd "RET") nil) ; return での補完禁止
+
+
 ;;helm
 (require 'helm-config)
 (require 'helm-descbinds)
@@ -148,7 +173,6 @@
 (helm-mode 1)
 
 (helm-descbinds-mode)
-
 
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-c h") 'helm-mini)
@@ -166,6 +190,11 @@
 (define-key helm-find-files-map (kbd "C-h") 'delete-backward-char)
 (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
 (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
+
+(require 'ac-helm)
+(global-set-key (kbd "M-/") 'ac-complete-with-helm)
+(define-key ac-complete-mode-map (kbd "M-/") 'ac-complete-with-helm)
+
 
 ;; Emulate `kill-line' in helm minibuffer
 (setq helm-delete-minibuffer-contents-from-point t)
