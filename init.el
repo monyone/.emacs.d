@@ -98,6 +98,8 @@
 ;; インストしたものをsyncする
 (defvar el-get-packages
   '(
+    ;;括弧の強調表示
+    rainbow-delimiters
     ;;helm関連
     helm
     helm-descbinds  ;;キーバインドをhelmで表示
@@ -112,6 +114,11 @@
 ;;markdown
 (require 'markdown-mode)
 (require 'markdown-mode+)
+
+;; rainbow-delimiters
+(require 'rainbow-delimiters)
+(global-rainbow-delimiters-mode t)
+(custom-set-faces '(rainbow-delimiters-depth-1-face ((t (:foreground "#7f8c8d")))))
 
 ;;helm
 (require 'helm-config)
@@ -133,7 +140,6 @@
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "C-c g") 'helm-resume)
 (global-set-key (kbd "C-c b") 'helm-descbinds)
-
 
 (define-key helm-map (kbd "C-h") 'delete-backward-char)
 (define-key helm-find-files-map (kbd "C-h") 'delete-backward-char)
