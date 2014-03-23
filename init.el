@@ -91,10 +91,14 @@
   "A list of package to install from el-get al alunch.")
 (el-get 'sync el-get-packages)
 
-;;; インスコしたものに対する設定
+;-------------------------------------------
+; インスコしたものに対する設定
+;-------------------------------------------
+
 ;;markdown
 (require 'markdown-mode)
 (require 'markdown-mode+)
+
 ;;tabbar
 (require 'tabbar)
 ;; scratch buffer以外をまとめてタブに表示する
