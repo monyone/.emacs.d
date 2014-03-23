@@ -103,6 +103,8 @@
   '(
     ;; 括弧の強調表示
     rainbow-delimiters
+    ;; 検索
+    anzu
     ;; helm関連
     helm
     helm-descbinds  ;;キーバインドをhelmで表示
@@ -125,6 +127,13 @@
 
 ;; sudden-death
 (require 'sudden-death)
+
+;; anzu
+(global-anzu-mode +1)
+(custom-set-variables
+  '(anzu-mode-lighter "")
+  '(anzu-deactivate-region t)
+  '(anzu-search-threshold 1000))
 
 ;;helm
 (require 'helm-config)
