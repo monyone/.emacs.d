@@ -1,4 +1,11 @@
 ;-------------------------------------------
+; 全体のキー入力関連の設定
+;-------------------------------------------
+
+;;; 
+(global-set-key "\C-h" 'delete-backward-char)
+
+;-------------------------------------------
 ; 保存に関する設定
 ;-------------------------------------------
 
@@ -10,6 +17,11 @@
 ; エディタの表示に関する設定
 ;-------------------------------------------
 
+;;; welcome メッセージは封印
+(setq inhibit-startup-message t)
+
+;;; 時間を表示
+(display-time)
 ;;; 現在行を目立たせる
 (global-hl-line-mode)
 ;;; カーソルの位置が何文字目かを表示する
@@ -23,10 +35,14 @@
 (show-paren-mode 1)
 ;;; ウィンドウ内に収まらないときだけ括弧内も光らせる。
 (setq show-paren-style 'mixed)
+;;; 選択範囲を光らせる
+(transient-mark-mode 1)
 
 ;;; C-x bでミニバッファにバッファ候補を表示
 (iswitchb-mode t)
-;(iswitchb-default-keybindings)
+(setq read-buffer-function 'iswitchb-read-buffer)
+(defvar iswitchb-regexp nil)
+(defvar iswitch-b-prompt-newbuffer nil)
 
 ;-------------------------------------------
 ; 標準のパッケージ管理に関する設定
