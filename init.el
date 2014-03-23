@@ -97,7 +97,11 @@
 
 ;; インストしたものをsyncする
 (defvar el-get-packages
-  '()
+  '(
+    ;;helm関連
+    helm
+    helm-descbinds  ;;キーバインドをhelmで表示
+   )
   "A list of package to install from el-get al alunch.")
 (el-get 'sync el-get-packages)
 
@@ -108,3 +112,69 @@
 ;;markdown
 (require 'markdown-mode)
 (require 'markdown-mode+)
+
+;;helm
+(require 'helm-config)
+(require 'helm-descbinds)
+
+(helm-mode 1)
+
+(helm-descbinds-mode)
+
+
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-c h") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-r") 'helm-recentf)
+(global-set-key (kbd "M-y") 'helm-imenu)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+
+(define-key helm-map (kbd "C-h") 'delete-backward-char)
+(define-key helm-find-files-map (kbd "C-h") 'delete-backward-char)
+(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
+(define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
+
+;; Emulate `kill-line' in helm minibuffer
+(setq helm-delete-minibuffer-contents-from-point t)
+(defadvice helm-delete-minibuffer-contents (before helm-emulate-kill-line activate)
+  "Emulate `kill-line' in helm minibuffer"
+  (kill-new (buffer-substring (point) (field-end))))
+
+; helm-find-files で helm-execute-presistent-action した場合, ファイルがなければキャンセルする.
+(defadvice helm-ff-kill-or-find-buffer-fname (around execute-only-if-exist activate)
+  "Execute command only if CANDIDATE exists"
+  (when (file-exists-p candidate)
+    ad-do-it))
+
+;; Disable helm in some functions
+(add-to-list 'helm-completing-read-handlers-alist '(find-alternate-file . nil))
+
+(defadvice helm-ff-transform-fname-for-completion (around my-transform activate)
+  "Transform the pattern to reflect my intention"
+  (let* ((pattern (ad-get-arg 0))
+         (input-pattern (file-name-nondirectory pattern))
+         (dirname (file-name-directory pattern)))
+    (setq input-pattern (replace-regexp-in-string "\\." "\\\\." input-pattern))
+    (setq ad-return-value
+          (concat dirname
+                  (if (string-match "^\\^" input-pattern)
+                      ;; '^' is a pattern for basename
+                      ;; and not required because the directory name is prepended
+                      (substring input-pattern 1)
+                    (concat ".*" input-pattern))))))
+
+(defun helm-buffers-list-pattern-transformer (pattern)
+  (if (equal pattern "")
+      pattern
+    ;; Escape '.' to match '.' instead of an arbitrary character
+    (setq pattern (replace-regexp-in-string "\\." "\\\\." pattern))
+    (let ((first-char (substring pattern 0 1)))
+      (cond ((equal first-char "*")
+             (concat " " pattern))
+            ((equal first-char "=")
+             (concat "*" (substring pattern 1)))
+            (t
+             pattern)))))
+
+(add-to-list 'helm-source-buffers-list
+             '(pattern-transformer helm-buffers-list-pattern-transformer))
