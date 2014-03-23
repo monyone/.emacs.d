@@ -64,9 +64,17 @@
    )
   "A list of packages to install from package at launch.")
 ;; 無いものに関してはインストールするように.
-(dolist (package installed_packages)
-  (when (or (not (package-installed-p package)))
-    (package-install package)))
+; 未インストールなものが無いかチェック
+(require 'cl)
+(setq already-installed-packages-p
+  (reduce (lambda (ret package) (and ret (package-installed-p package))) (append '(t) installed_packages)))
+; 未インストールのものがあったらリフレッシュしてインスコ
+(if (not already-installed-packages-p)
+  (progn
+    (package-refresh-contents)
+    (dolist (package installed_packages)
+      (when (or (not (package-installed-p package)))
+        (package-install package)))))
 
 ;-------------------------------------------
 ; el-get 用の設定
