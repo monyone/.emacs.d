@@ -60,7 +60,8 @@
   '(
     markdown-mode  ;;; markdown用
     markdown-mode+ ;;;
-
+    ;; 行番号を左に表示
+    linum
     ;; 突然の死で強調表示
     sudden-death
    )
@@ -119,6 +120,11 @@
 ;;markdown
 (require 'markdown-mode)
 (require 'markdown-mode+)
+
+;; linum
+(require 'linum)
+(global-linum-mode 1)
+(setq linum-format "%d ")
 
 ;; rainbow-delimiters
 (require 'rainbow-delimiters)
