@@ -1,4 +1,12 @@
 ;-------------------------------------------
+; バージョン判定用変数
+;-------------------------------------------
+(defvar oldemacs-p (<= emacs-major-version 22))
+(defvar emacs23-p (<= emacs-major-version 23))
+(defvar emacs24-p (>= emacs-major-version 24))
+
+
+;-------------------------------------------
 ; 日本語用の設定 (UTF-8)
 ;-------------------------------------------
 (set-language-environment 'Japanese)
