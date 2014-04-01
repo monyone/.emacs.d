@@ -1,4 +1,10 @@
 ;-------------------------------------------
+; 日本語用の設定 (UTF-8)
+;-------------------------------------------
+(set-language-environment 'Japanese)
+(prefer-coding-system 'utf-8)
+
+;-------------------------------------------
 ; 全体のキー入力関連の設定
 ;-------------------------------------------
 
@@ -11,7 +17,7 @@
 
 ;;; バックアップファイルはウザい!!!
 (setq make-backup-files nil)
-(setq auto-save-default nil)
+(setq delete-auto-save-files t)
 
 ;-------------------------------------------
 ; エディタの表示に関する設定
@@ -115,12 +121,21 @@
         (package-install package)))))
 
 ;-------------------------------------------
+; theme
+;-------------------------------------------
+(load-theme 'deeper-blue t)
+
+;-------------------------------------------
 ; インスコしたものに対する設定
 ;-------------------------------------------
 
 ;;markdown
 (require 'markdown-mode)
-(require 'markdown-mode+)
+;;(require 'markdown-mode+)
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Mrkdown files" t)
+(add-to-list 'auto-mode-alist '("\\.md$"       . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 
 ;; linum
 (require 'linum)
