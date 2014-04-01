@@ -24,13 +24,20 @@
 ;;; C-h は delete だと決まってるだろ!!
 (global-set-key "\C-h" 'delete-backward-char)
 
+;;; 
+
+;-------------------------------------------
+; フォーマットに関する設定
+;------------------------------------------
+(setq default-tab-width 2)
+
 ;-------------------------------------------
 ; 保存に関する設定
 ;-------------------------------------------
 
 ;;; バックアップファイルはウザい!!!
 (setq make-backup-files nil)
-(setq delete-auto-save-files t)
+(setq auto-save-default nil)
 
 ;-------------------------------------------
 ; エディタの表示に関する設定
@@ -43,6 +50,7 @@
 (display-time)
 ;;; 現在行を目立たせる
 (global-hl-line-mode)
+(set-face-background 'hl-line "DarkSlateBlue")
 ;;; カーソルの位置が何文字目かを表示する
 (column-number-mode t)
 ;;; カーソルの位置が何行目かを表示する
@@ -51,12 +59,14 @@
 (require 'saveplace)
 (setq-default save-place t)
 ;;; 対応する括弧を光らせる。
-(show-paren-mode 1)
+(show-paren-mode t)
+(setq show-paren-delay 0)
 ;;; ウィンドウ内に収まらないときだけ括弧内も光らせる。
 (setq show-paren-style 'mixed)
+;(set-face-background 'show-paren-match "DarkSlateBlue")
+;(set-face-foreground 'show-paren-match "black")
 ;;; 選択範囲を光らせる
 (transient-mark-mode 1)
-
 ;;; C-x bでミニバッファにバッファ候補を表示
 (iswitchb-mode t)
 (setq read-buffer-function 'iswitchb-read-buffer)
