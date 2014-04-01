@@ -102,7 +102,7 @@
   "A list of packages to install from package at launch.")
 ;; 無いものに関してはインストールするように.
 ; 未インストールなものが無いかチェック
-(require 'cl)
+(require 'cl-lib)
 (setq already-installed-packages-p
   (reduce (lambda (ret package) (and ret (if (eq 't package) 't (package-installed-p package)))) (append '(t t) installed_packages)))
 
