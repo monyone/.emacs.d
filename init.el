@@ -100,12 +100,12 @@
 ; 未インストールなものが無いかチェック
 
 (if (not(require 'cl-lib nil 'noerror))
-	(progn
-    (package-refresh-contents)
-		(package-install 'cl-lib)))
+		(progn
+			(package-refresh-contents)
+			(package-install 'cl-lib)))
 (require 'cl-lib)	
 (setq already-installed-packages-p
-  (reduce (lambda (ret package) (and ret (if (eq 't package) 't (package-installed-p package)))) (append '(t t) installed_packages)))
+  (cl-reduce (lambda (ret package) (and ret (if (eq 't package) 't (package-installed-p package)))) (append '(t t) installed_packages)))
 
 ; 未インストールのものがあったらリフレッシュしてインスコ
 (if (not already-installed-packages-p)
