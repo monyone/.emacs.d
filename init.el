@@ -5,6 +5,11 @@
 (defvar emacs23-p (<= emacs-major-version 23))
 (defvar emacs24-p (>= emacs-major-version 24))
 
+;-------------------------------------------
+; Compile-Log の非表示
+;-------------------------------------------
+(let ((win (get-buffer-window "*Compile-Log*")))
+  (when win (delete-window win)))
 
 ;-------------------------------------------
 ; 日本語用の設定 (UTF-8)
@@ -165,3 +170,11 @@
   '(anzu-deactivate-region t)
   '(anzu-search-threshold 1000))
 
+
+(defun message-startup-time ()
+  (message
+   "Emacs loaded in %dms"
+   (/ (- (+ (third after-init-time) (* 1000000 (second after-init-time)))
+	 (+ (third before-init-time) (* 1000000 (second before-init-time))))
+      1000)))
+(add-hook 'after-init-hook 'message-startup-time)
