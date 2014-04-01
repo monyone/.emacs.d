@@ -74,39 +74,6 @@
 (defvar iswitch-b-prompt-newbuffer nil)
 
 ;-------------------------------------------
-; el-get 用の設定
-;-------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/el-get-elisp/el-get")
-(setq el-get-dir "~/.emacs.d/el-get-elisp")
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(require 'el-get)
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-elisp/el-git-user-recipes")
-
-(el-get 'sync)
-
-;; インストしたものをsyncする
-(defvar el-get-packages
-  '(
-    ;; cl用
-    cl-lib
-    ;; 括弧の強調表示
-    rainbow-delimiters
-    ;; 検索
-    anzu
-    ;;
-   )
-  "A list of package to install from el-get al alunch.")
-(el-get 'sync el-get-packages)
-
-;-------------------------------------------
 ; 標準のパッケージ管理に関する設定
 ;-------------------------------------------
 
@@ -142,6 +109,39 @@
     (dolist (package installed_packages)
       (when (or (not (package-installed-p package)))
         (package-install package)))))
+
+;-------------------------------------------
+; el-get 用の設定
+;-------------------------------------------
+(add-to-list 'load-path "~/.emacs.d/el-get-elisp/el-get")
+(setq el-get-dir "~/.emacs.d/el-get-elisp")
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(require 'el-get)
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-elisp/el-git-user-recipes")
+
+(el-get 'sync)
+
+;; インストしたものをsyncする
+(defvar el-get-packages
+  '(
+    ;; 括弧の強調表示
+    rainbow-delimiters
+    ;; 検索
+    anzu
+    ;;
+   )
+  "A list of package to install from el-get al alunch.")
+(el-get 'sync el-get-packages)
+
+
 
 ;-------------------------------------------
 ; theme
