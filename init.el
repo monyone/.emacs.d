@@ -143,7 +143,7 @@
 
 ;; rainbow-delimiters
 (require 'rainbow-delimiters)
-(global-rainbow-delimiters-mode t)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 (custom-set-faces '(rainbow-delimiters-depth-1-face ((t (:foreground "#7f8c8d")))))
 
 ;; sudden-death
