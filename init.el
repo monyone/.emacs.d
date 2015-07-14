@@ -160,7 +160,7 @@
 (defun message-startup-time ()
   (message
    "Emacs loaded in %dms"
-   (/ (- (+ (third after-init-time) (* 1000000 (second after-init-time)))
-	 (+ (third before-init-time) (* 1000000 (second before-init-time))))
+   (/ (- (+ (cl-third after-init-time) (* 1000000 (cl-second after-init-time)))
+	 (+ (cl-third before-init-time) (* 1000000 (cl-second before-init-time))))
       1000)))
 (add-hook 'after-init-hook 'message-startup-time)
