@@ -76,7 +76,11 @@
 ;-------------------------------------------
 ; カラーテーマ
 ;-------------------------------------------
-(load-theme 'deeper-blue t)
+(if emacs23-p (progn (require 'color-theme)
+										 (color-theme-initialize)
+										 (color-theme-deep-blue)
+										 )
+	(load-theme 'deeper-blue t))
 
 ;-------------------------------------------
 ; 標準のパッケージ管理に関する設定
