@@ -74,6 +74,11 @@
 (defvar iswitch-b-prompt-newbuffer nil)
 
 ;-------------------------------------------
+; カラーテーマ
+;-------------------------------------------
+(load-theme 'deeper-blue t)
+
+;-------------------------------------------
 ; 標準のパッケージ管理に関する設定
 ;-------------------------------------------
 
@@ -94,6 +99,10 @@
     linum
     ;; 突然の死で強調表示
     sudden-death
+    ;; 括弧の強調表示
+    rainbow-delimiters
+    ;; 検索
+    anzu
    )
   "A list of packages to install from package at launch.")
 ;; 無いものに関してはインストールするように.
@@ -114,44 +123,6 @@
     (dolist (package installed_packages)
       (when (or (not (package-installed-p package)))
         (package-install package)))))
-
-;-------------------------------------------
-; el-get 用の設定
-;-------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/el-get-elisp/el-get")
-(setq el-get-dir "~/.emacs.d/el-get-elisp")
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(require 'el-get)
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-elisp/el-git-user-recipes")
-
-(el-get 'sync)
-
-;; インストしたものをsyncする
-(defvar el-get-packages
-  '(
-    ;; 括弧の強調表示
-    rainbow-delimiters
-    ;; 検索
-    anzu
-    ;;
-   )
-  "A list of package to install from el-get al alunch.")
-(el-get 'sync el-get-packages)
-
-
-
-;-------------------------------------------
-; theme
-;-------------------------------------------
-(load-theme 'deeper-blue t)
 
 ;-------------------------------------------
 ; インスコしたものに対する設定
