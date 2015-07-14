@@ -14,7 +14,5 @@ eshell/
 tramp
 ac-comphist.dat
 
-;; el-get-option
-el-get-elisp/*
-!el-get-elisp/el-get-user-recipes/
+;; etc
 !.gitkeep
