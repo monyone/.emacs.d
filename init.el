@@ -168,7 +168,9 @@
   '(anzu-deactivate-region t)
   '(anzu-search-threshold 1000))
 
-
+;-------------------------------
+; 起動までの時間計測
+;-------------------------------
 (defun message-startup-time ()
   (message
    "Emacs loaded in %dms"
