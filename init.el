@@ -24,7 +24,15 @@
 ;;; C-h は delete だと決まってるだろ!!
 (global-set-key "\C-h" 'delete-backward-char)
 
-;;; 
+;;; 拡大, 縮小は1ステップで行いたい
+; \C-+ で拡大
+(global-set-key [(control ?;)] (lambda () (interactive) (text-scale-increase 1)))
+(global-set-key [(control ?+)] (lambda () (interactive) (text-scale-increase 1)))
+; \C-- で縮小
+(global-set-key [(control ?=)] (lambda () (interactive) (text-scale-decrease 1)))
+(global-set-key [(control ?-)] (lambda () (interactive) (text-scale-decrease 1)))
+; \C-0 でデフォルトに戻す
+(global-set-key [(control ?0)] (lambda () (interactive) (text-scale-increase 0)))
 
 ;-------------------------------------------
 ; フォーマットに関する設定
