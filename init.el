@@ -90,7 +90,7 @@
 (require 'package)
 ;; 公式のリストは対応パッケージが少ない. 有志のも使う
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (package-initialize)
 
 ;;; 標準で管理するパッケージを定義
