@@ -37,7 +37,7 @@
 
 ;;; バックアップファイルはウザい!!!
 (setq make-backup-files nil)
-(setq auto-save-default nil)
+(setq auto-save-dexfault nil)
 
 ;-------------------------------------------
 ; エディタの表示に関する設定
@@ -80,7 +80,7 @@
 										 (color-theme-initialize)
 										 (color-theme-deep-blue)
 										 )
-	(load-theme 'deeper-blue t))
+	(load-theme 'adwaita t))
 
 ;-------------------------------------------
 ; 標準のパッケージ管理に関する設定
