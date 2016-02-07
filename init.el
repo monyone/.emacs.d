@@ -2,8 +2,8 @@
 ; バージョン判定用変数
 ;-------------------------------------------
 (defvar oldemacs-p (<= emacs-major-version 22))
-(defvar emacs23-p (<= emacs-major-version 23))
-(defvar emacs24-p (>= emacs-major-version 24))
+(defvar emacs23-p  (<= emacs-major-version 23))
+(defvar emacs24-p  (>= emacs-major-version 24))
 
 ;-------------------------------------------
 ; Compile-Log の非表示
@@ -58,7 +58,8 @@
 (display-time)
 ;;; 現在行を目立たせる
 (global-hl-line-mode)
-(set-face-background 'hl-line "DarkSlateBlue")
+(set-face-background 'hl-line "bisque")
+; (set-face-foreground 'highlight nil)
 ;;; カーソルの位置が何文字目かを表示する
 (column-number-mode t)
 ;;; カーソルの位置が何行目かを表示する
@@ -88,7 +89,7 @@
 										 (color-theme-initialize)
 										 (color-theme-deep-blue)
 										 )
-	(load-theme 'adwaita t))
+	(load-theme 'whiteboard t))
 
 ;-------------------------------------------
 ; フォント
@@ -111,7 +112,7 @@
   '(
     ;; markdown
     markdown-mode
-    markdown-mode+
+		
     ;; 行番号を左に表示
     linum
     ;; 突然の死で強調表示
@@ -147,7 +148,6 @@
 
 ;;markdown
 (require 'markdown-mode)
-;;(require 'markdown-mode+)
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Mrkdown files" t)
 (add-to-list 'auto-mode-alist '("\\.md$"       . markdown-mode))
